@@ -1,0 +1,45 @@
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form {
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 75%;
+  gap: 10px;
+  padding: 20px;
+  margin:  10px 300px;
+  border: 1px solid #f6318c;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contactInfo {
+ display: flex;
+ flex-direction: column;
+}
+
+#contactIcon {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+#displayedName {
+  font-size: 2rem;
+}
