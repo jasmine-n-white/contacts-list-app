@@ -8,6 +8,7 @@ function App() {
   const [contacts, setContacts] = useState([]); 
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   // UseEffect hook to run fetchContacts function when the component mounts
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
       console.log(error);
     }
     setContacts(data);
+    setIsLoading(false);
   };
 
   // Define an addContact function
@@ -29,6 +31,7 @@ function App() {
     const { error } = await supabase
       .from('contacts')
       .insert({ name: newName, phone_number: newNumber })
+      fetchContacts();
       setNewName("");
       setNewNumber("");
       fetchContacts();
@@ -44,7 +47,9 @@ function App() {
     setContacts(contacts.filter((contact) => contact.id !== id ));
     // Delete logic here
   };
-
+  if (isLoading) {
+    return <p>Loading...</p>;
+  } else {
   return (
     <div className="App">
       <Header />
@@ -78,6 +83,6 @@ function App() {
       </div>
   );
 }
-
+}
 export default App;
 

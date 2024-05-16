@@ -5,7 +5,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,6 +27,7 @@ li {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 10px;
+  background-color: beige;
 
 }
 
@@ -55,6 +55,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
   max-width: 100%;
+  background-position: fixed;
+  background-color: lightblue;
+
 }
 
 h1 {
@@ -69,7 +72,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: rgb(106, 188, 247);
   cursor: pointer;
   transition: border-color 0.25s;
 }

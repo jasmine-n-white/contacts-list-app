@@ -8,22 +8,27 @@
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 form {
-  background-color: blue;
+  background-color: navy;
   display: flex;
   flex-direction: column;
   align-self: center;
   width: 75%;
-  gap: 10px;
   padding: 20px;
   margin:  10px 300px;
+  position: fixed;
   border: 1px solid #f6318c;
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form input {
+  background-color: white;
+  color: black;
 }
 
 .contactInfo {
@@ -43,3 +48,4 @@ form {
 #displayedName {
   font-size: 2rem;
 }
+
