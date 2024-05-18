@@ -35,7 +35,7 @@ function App() {
       setNewName("");
       setNewNumber("");
       fetchContacts();
-
+      console.log("Success!");
   };
 
   // Define a deleteContact function
@@ -45,30 +45,49 @@ function App() {
       console.log("error");
     }
     setContacts(contacts.filter((contact) => contact.id !== id ));
-    // Delete logic here
   };
+
   if (isLoading) {
-    return <p>Loading...</p>;
-  } else {
-  return (
-    <div className="App">
+    return <div className="App">
       <Header />
       <form>
       <input
-          type="text"
+          type="text" id="newName"
           placeholder="Add a new contact name"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
         />
          <input
-          type="text"
+          type="text" id="newNumber"
           placeholder="Add a phone number"
           value={newNumber}
           onChange={(e) => setNewNumber(e.target.value)}
         />
         <button onClick={addContact}>Add Contact</button>
       </form>
-          <ul>
+      <p>Loading...</p>
+    </div>
+  } else {
+  return (
+   <>
+      <Header />
+      <div className="App">
+      <form>
+      <input
+          type="text" id="newName"
+          placeholder="Add a new contact name"
+          value={newName}
+          onChange={(e) => setNewName(e.target.value)}
+        />
+         <input
+          type="text" id="newNumber"
+          placeholder="Add a phone number"
+          value={newNumber}
+          onChange={(e) => setNewNumber(e.target.value)}
+        />
+        <button onClick={addContact}>Add Contact</button>
+      </form>
+          <ul className="contacts">
             {contacts.map((contact) => (
               <li key={contact.id}>
               <img src="https://www.zeasn.com/static/kindeditor/attached/image/20220712/20220712100226_24273.png" id="contactIcon" alt="default contact icon" />
@@ -81,6 +100,7 @@ function App() {
             ))}
           </ul>
       </div>
+      </>
   );
 }
 }
