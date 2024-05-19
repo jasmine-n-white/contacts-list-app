@@ -10,7 +10,6 @@ function App() {
   const [newNumber, setNewNumber] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [formError, setFormError] = useState(null);
-  const [nameError, setNameError] = useState(null);
   const [numberError, setNumberError] = useState(null);
 
   // UseEffect hook to run fetchContacts function when the component mounts
@@ -28,9 +27,6 @@ function App() {
     setIsLoading(false);
   };
 
-  let isAlpha = /^[a-zA-Z]+$/;
-
-
   // Define an addContact function
   const addContact = async (e) => { 
     e.preventDefault();
@@ -45,12 +41,6 @@ function App() {
       return;
     } else {
       setNumberError(null);
-    }
-    if (newName.length<2 ||!isAlpha.test(newName)) {
-      setNameError("Name must contain letters only! Please enter at least 2 letters for the name!");
-      return;
-    } else {
-      setNameError(null);
     }
     const { error } = await supabase
       .from('contacts')
@@ -102,18 +92,18 @@ function App() {
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
         />
-        {nameError && <p>{nameError}</p>}
          <input
           type="text" id="newNumber"
           placeholder="Add a phone number"
           value={newNumber}
           onChange={(e) => setNewNumber(e.target.value)}
         />
-        {numberError && <p>{numberError}</p>}
-        {formError && <h3>{formError}</h3>}
+        {numberError && <p className="errorMessage">{numberError}</p>}
+        {formError && <h3 className="errorMessage">{formError}</h3>}
         <button onClick={addContact}>Add Contact</button>
       </form>
-          <ul className="contacts">
+        <div className="contacts">
+          <ul>
             {contacts.map((contact) => (
               <li key={contact.id}>
               <img src="https://www.zeasn.com/static/kindeditor/attached/image/20220712/20220712100226_24273.png" id="contactIcon" alt="default contact icon" />
@@ -125,6 +115,7 @@ function App() {
               </li>
             ))}
           </ul>
+          </div>
       </div>
       </>
   );

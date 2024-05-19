@@ -22,10 +22,9 @@ li {
   align-items: center;
   flex-direction: row;
   padding: 10px 40px;
-  margin: 0px 400px;
+  margin: 10px 350px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 10px;
   background-color: beige;
 
 }
@@ -50,11 +49,9 @@ li button:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
   max-width: 100%;
-  background-position: fixed;
   background-color: lightblue;
 
 }
