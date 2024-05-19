@@ -12,6 +12,7 @@ function App() {
   const [formError, setFormError] = useState(null);
   const [numberError, setNumberError] = useState(null);
 
+
   // UseEffect hook to run fetchContacts function when the component mounts
   useEffect(() => {
     fetchContacts();
@@ -26,22 +27,26 @@ function App() {
     setContacts(data);
     setIsLoading(false);
   };
-
-  // Define an addContact function
-  const addContact = async (e) => { 
-    e.preventDefault();
+  
+  const  validateForm =()=> {
     if(!newName||!newNumber) {
-      setFormError("Please fill out information!");
-      return;
+      setFormError("Please fill out all required fields!");
+      return true;
     } else if (newName && newNumber){
       setFormError(null);
     } 
     if (!isFinite(newNumber) || newNumber.length!==10) {
       setNumberError("Please enter a 10-digit number!");
-      return;
+      return true;
     } else {
       setNumberError(null);
     }
+  }
+  // Define an addContact function
+  const addContact = async (e) => { 
+    e.preventDefault();
+    validateForm();
+    if (validateForm()) return;
     const { error } = await supabase
       .from('contacts')
       .insert({ name: newName, phone_number: newNumber });
