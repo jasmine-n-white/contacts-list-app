@@ -9,6 +9,9 @@ function App() {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [formError, setFormError] = useState(null);
+  const [nameError, setNameError] = useState(null);
+  const [numberError, setNumberError] = useState(null);
 
   // UseEffect hook to run fetchContacts function when the component mounts
   useEffect(() => {
@@ -25,17 +28,37 @@ function App() {
     setIsLoading(false);
   };
 
+  let isAlpha = /^[a-zA-Z]+$/;
+
+
   // Define an addContact function
-  const addContact = async () => { 
-    if(!newName ||!newNumber) return;
+  const addContact = async (e) => { 
+    e.preventDefault();
+    if(!newName||!newNumber) {
+      setFormError("Please fill out information!");
+      return;
+    } else if (newName && newNumber){
+      setFormError(null);
+    } 
+    if (!isFinite(newNumber) || newNumber.length!==10) {
+      setNumberError("Please enter a 10-digit number!");
+      return;
+    } else {
+      setNumberError(null);
+    }
+    if (newName.length<2 ||!isAlpha.test(newName)) {
+      setNameError("Name must contain letters only! Please enter at least 2 letters for the name!");
+      return;
+    } else {
+      setNameError(null);
+    }
     const { error } = await supabase
       .from('contacts')
-      .insert({ name: newName, phone_number: newNumber })
+      .insert({ name: newName, phone_number: newNumber });
       fetchContacts();
       setNewName("");
       setNewNumber("");
       fetchContacts();
-      console.log("Success!");
   };
 
   // Define a deleteContact function
@@ -79,12 +102,15 @@ function App() {
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
         />
+        {nameError && <p>{nameError}</p>}
          <input
           type="text" id="newNumber"
           placeholder="Add a phone number"
           value={newNumber}
           onChange={(e) => setNewNumber(e.target.value)}
         />
+        {numberError && <p>{numberError}</p>}
+        {formError && <h3>{formError}</h3>}
         <button onClick={addContact}>Add Contact</button>
       </form>
           <ul className="contacts">
