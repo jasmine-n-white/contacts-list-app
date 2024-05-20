@@ -3,7 +3,7 @@ import './Header.css'
 
 function Header() {
   return (
-   <h1 className="headerFormat">Contact App</h1>
+   <h1 className="headerFormat">Contact List</h1>
   )
 }
 

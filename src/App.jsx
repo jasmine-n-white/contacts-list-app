@@ -8,7 +8,6 @@ function App() {
   const [contacts, setContacts] = useState([]); 
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [formError, setFormError] = useState(null);
   const [numberError, setNumberError] = useState(null);
 
@@ -25,7 +24,6 @@ function App() {
       console.log(error);
     }
     setContacts(data);
-    setIsLoading(false);
   };
   
   const  validateForm =()=> {
@@ -42,6 +40,7 @@ function App() {
       setNumberError(null);
     }
   }
+
   // Define an addContact function
   const addContact = async (e) => { 
     e.preventDefault();
@@ -65,27 +64,7 @@ function App() {
     setContacts(contacts.filter((contact) => contact.id !== id ));
   };
 
-  if (isLoading) {
-    return <div className="App">
-      <Header />
-      <form>
-      <input
-          type="text" id="newName"
-          placeholder="Add a new contact name"
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-        />
-         <input
-          type="text" id="newNumber"
-          placeholder="Add a phone number"
-          value={newNumber}
-          onChange={(e) => setNewNumber(e.target.value)}
-        />
-        <button onClick={addContact}>Add Contact</button>
-      </form>
-      <p>Loading...</p>
-    </div>
-  } else {
+  
   return (
    <>
       <Header />
@@ -125,6 +104,6 @@ function App() {
       </>
   );
 }
-}
+
 export default App;
 
